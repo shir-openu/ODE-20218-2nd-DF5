@@ -269,54 +269,61 @@ const EXERCISE_MODE = 0; // TESTING EXAM MODE
 /* מבנה נתונים של תרגילים */
 const problems = [
   {
-    id: 'ode_fourth_order_undetermined_coeffs_01',
-    title: 'מסדר רביעי – שיטת המקדמים',
-    
-    latexProblem: String.raw`y^{(4)} + 2y'' + y = x^2 + 2x + 1`,
-    homogeneousSolution: String.raw`y_h = C_1 \cos x + C_2 \sin x + C_3 x \cos x + C_4 x \sin x`,
-    particularSolution: String.raw`y_p = x^2 + 2x - 3`,
-    exampleInput: '',
-    
+    id: 'ode_first_order_exact_01',
+    title: 'מסדר ראשון – משוואה מדויקת',
+    latexProblem: String.raw`\left(\frac{y}{x} - 2\frac{y^3}{x^3}\right)y' = 2 - \frac{y^2}{x^2}`,
+    homogeneousSolution: '',  // אין פתרון הומוגני למשוואה מסדר ראשון
+    particularSolution: '',   // אין פתרון פרטי נפרד
     hint1Html: `
-      זוהי משוואה לינארית אי-הומוגנית מסדר רביעי עם מקדמים קבועים.<br/>
-      המשוואה ההומוגנית: \\(y^{(4)} + 2y'' + y = 0\\).<br/>
-      המשוואה האופיינית: \\(r^4 + 2r^2 + 1 = 0\\).<br/>
-      ניתן לפרק: \\((r^2 + 1)^2 = 0\\).<br/>
-      השורשים: \\(r = \pm i\\) (כל אחד בריבוי 2).<br/>
-      מערכת פתרונות: \\(\\{\cos x, \sin x, x\cos x, x\sin x\\}\\).
+      <p><strong>רמז 1:</strong> זוהי משוואה דיפרנציאלית מסדר ראשון.</p>
+      <p>כדי לפתור, יש לכתוב אותה בצורה: <code>M(x,y)dx + N(x,y)dy = 0</code></p>
+      <p>ואז לבדוק אם המשוואה מדויקת על ידי בדיקה: <code>∂M/∂y = ∂N/∂x</code></p>
     `,
-    
     hint2Html: `
-      הפתרון ההומוגני: \\(y_h = C_1 \cos x + C_2 \sin x + C_3 x \cos x + C_4 x \sin x\\).<br/>
-      לפתרון פרטי השתמשו בשיטת המקדמים.<br/>
-      מאחר ש-\\(0\\) אינו שורש של המשוואה האופיינית, נציב: \\(y = Ax^2 + Bx + C\\).<br/>
-      חשבו נגזרות: \\(y' = 2Ax + B\\), \\(y'' = 2A\\), \\(y^{(3)} = 0\\), \\(y^{(4)} = 0\\).<br/>
-      הציבו במשוואה והשוו מקדמים: \\(A = 1, B = 2, C = -3\\).
+      <p><strong>רמז 2:</strong> אם המשוואה מדויקת, יש למצוא פונקציה <code>F(x,y)</code> כך ש:</p>
+      <ul>
+        <li><code>∂F/∂x = M(x,y)</code></li>
+        <li><code>∂F/∂y = N(x,y)</code></li>
+      </ul>
+      <p>והפתרון הכללי הוא: <code>F(x,y) = C</code></p>
     `,
-    
-    solutionDisplayLatex: String.raw`y = C_1 \cos x + C_2 \sin x + C_3 x \cos x + C_4 x \sin x + x^2 + 2x - 3`,
-    
+    solutionDisplayLatex: String.raw`x^2 y^2 - x^4 - y^4 = C`,
     solutionStepsHtml: `
-      המשוואה ההומוגנית: \\(y^{(4)} + 2y'' + y = 0\\) עם \\(r^4 + 2r^2 + 1 = 0\\).<br/>
-      פירוק: \\((r^2 + 1)^2 = 0\\).<br/>
-      שורשים מרוכבים בריבוי 2: \\(r = \pm i\\).<br/>
-      הפתרון ההומוגני: \\(y_h = C_1 \cos x + C_2 \sin x + C_3 x \cos x + C_4 x \sin x\\).<br/>
-      לפתרון פרטי בשיטת המקדמים: \\(y = Ax^2 + Bx + C\\).<br/>
-      חישוב נגזרות: \\(y' = 2Ax + B\\), \\(y'' = 2A\\), \\(y^{(3)} = y^{(4)} = 0\\).<br/>
-      הצבה במשוואה: \\(0 + 2 \cdot 2A + (Ax^2 + Bx + C) = x^2 + 2x + 1\\).<br/>
-      השוואת מקדמים:<br/>
-      מקדם \\(x^2\\): \\(A = 1\\).<br/>
-      מקדם \\(x\\): \\(B = 2\\).<br/>
-      מקדם חופשי: \\(4A + C = 1 \Rightarrow C = -3\\).<br/>
-      הפתרון הפרטי: \\(y_p = x^2 + 2x - 3\\).<br/>
-      הפתרון הכללי: \\(y = C_1 \cos x + C_2 \sin x + C_3 x \cos x + C_4 x \sin x + x^2 + 2x - 3\\).
+      <h3>שלבי הפתרון:</h3>
+      <ol>
+        <li>
+          <strong>כתיבת המשוואה בצורה הסטנדרטית:</strong><br>
+          נכפיל את שני האגפים ב-<code>x³</code> ונסדר:<br>
+          <code>(y²x - 2x³)dx + (yx² - 2y³)dy = 0</code><br>
+          כאשר: <code>M(x,y) = y²x - 2x³</code> ו-<code>N(x,y) = yx² - 2y³</code>
+        </li>
+        <li>
+          <strong>בדיקה אם המשוואה מדויקת:</strong><br>
+          <code>∂M/∂y = 2xy</code><br>
+          <code>∂N/∂x = 2xy</code><br>
+          ∂M/∂y = ∂N/∂x ✓ המשוואה מדויקת!
+        </li>
+        <li>
+          <strong>מציאת F(x,y):</strong><br>
+          מ-<code>F_x = M</code>:<br>
+          <code>F(x,y) = ∫(y²x - 2x³)dx = (1/2)x²y² - (1/2)x⁴ + g(y)</code>
+        </li>
+        <li>
+          <strong>מציאת g(y):</strong><br>
+          <code>F_y = x²y + g'(y) = N = yx² - 2y³</code><br>
+          לכן: <code>g'(y) = -2y³</code> → <code>g(y) = -(1/2)y⁴</code>
+        </li>
+        <li>
+          <strong>הפתרון הכללי:</strong><br>
+          <code>F(x,y) = (1/2)x²y² - (1/2)x⁴ - (1/2)y⁴ = C</code><br>
+          או בצורה פשוטה יותר:<br>
+          <code>x²y² - x⁴ - y⁴ = C</code>
+        </li>
+      </ol>
     `,
-    
     check: {
-      type: 'undetermined_coefficients_form',
-      homogeneousTerms: ['cos(x)', 'sin(x)', 'x*cos(x)', 'x*sin(x)'],
-      particularTerm: 'x^2+2*x-3',
-      particularCoeff: 1
+      type: 'exact_equation_form',
+      expectedForm: 'x^2*y^2-x^4-y^4',  // הצורה הצפויה ללא קבוע
     }
   }
 ];
