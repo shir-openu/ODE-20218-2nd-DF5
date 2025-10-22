@@ -1,7 +1,7 @@
 // api/ai-hint.js
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const MAX_ATTEMPTS = 2;
+const MAX_ATTEMPTS = 10;
 
 export default async function handler(req, res) {
   // CORS headers
