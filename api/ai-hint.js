@@ -54,7 +54,7 @@ Fᵧ(x,y) = x²y + g'(y) = yx² - 2y³
 
   try {
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     // בניית ההיסטוריה
     let conversationText = '';
